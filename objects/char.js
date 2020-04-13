@@ -15,6 +15,11 @@ export class Char extends BasicObject{
     this.maxFrame = 8;
     this.frameTime = 0;
     this.maxFrameTime = 5;
+    this.multShadowPosX = 1.45;
+    this.multShadowPosY = 2;
+    this.multShadowWidth = 3;
+    this.multShadowHeight = 8;
+    this.multShadowRotate = 2;
 
     }
     renderImage() {
@@ -27,7 +32,8 @@ export class Char extends BasicObject{
         context.globalAlpha = 0.5; 
         context.fillStyle = 'black'; 
         context.beginPath();
-        context.ellipse(this.posX + (this.width * 1.45), (this.posY + (this.height * 2)), (this.width / 3), (this.width / 8), 0, 0, (Math.PI * 2)); 
+        context.ellipse(this.posX + (this.width * this.multShadowPosX), (this.posY + (this.height * this.multShadowPosY)), 
+            (this.width / this.multShadowWidth), (this.height / this.multShadowHeight), 0, 0, (Math.PI * this.multShadowRotate)); 
         context.fill();
         context.restore();
 
