@@ -23,6 +23,14 @@ export class Char extends BasicObject{
             this.frameTime = 0;
             this.currentFrame = ++this.currentFrame%this.maxFrame
         }
+        context.save();
+        context.globalAlpha = 0.5; 
+        context.fillStyle = 'black'; 
+        context.beginPath();
+        context.ellipse(this.posX + (this.width * 1.45), (this.posY + (this.height * 2)), (this.width / 3), (this.width / 8), 0, 0, (Math.PI * 2)); 
+        context.fill();
+        context.restore();
+
         this.context.drawImage(this.sprites, 
             (this.sourceX * this.currentFrame), this.sourceY, 
             this.width, this.height, 
