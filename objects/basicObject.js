@@ -20,7 +20,7 @@ export class BasicObject {
         );
     }
 
-    update() {
+    update(speedScreen) {
         this.renderImage();
     }
 

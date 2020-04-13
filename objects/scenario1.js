@@ -4,7 +4,7 @@ const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 const scenario = new Image();
-scenario.src = './sprites/cenario.png';
+scenario.src = '../sprites/scenario.png';
 
 const maxWidthSky = ((Math.ceil((canvas.width / 511)) + 1) * 511);
 const maxWidthFloor = ((Math.ceil((canvas.width / 512)) + 1) * 512);
@@ -17,7 +17,7 @@ function getScenarioFloor(){
     return new BasicBackground(scenario, 3, 299, 512, 323, maxWidthFloor, (canvas.height - 323), canvas, context);
 }
 
-export class Background {
+export class Scenario1 {
     constructor(){
         this.listSky = [new BasicBackground(scenario, 3, 3, 511, 296, 0, 0,canvas, context), 
             getScenarioSky()]

@@ -1,6 +1,8 @@
-import { Background } from "./background.js";
+import { Scenario1 } from "./scenario1.js";
+import { Char } from "./char.js";
 
-const background = new Background();
+const scenario1 = new Scenario1();
+const char = new Char(45, 0, 45, 41, 30, 320);
 
 class GameStart {
     constructor(){
@@ -8,12 +10,12 @@ class GameStart {
     }
 
     renderImage(){
-        background.renderImage();
+        scenario1.renderImage();
 
     }
 
     update(){
-        background.update(this.speed)
+        scenario1.update(this.speed)
     }
 }
 
@@ -23,12 +25,13 @@ class GamePlay {
     }
 
     renderImage(){
-        background.renderImage();
+        scenario1.renderImage();
+        char.renderImage();
 
     }
 
     update(){
-        background.update(this.speed)
+        scenario1.update(this.speed)
     }
 }
 
@@ -38,12 +41,12 @@ class GameOver {
     }
 
     renderImage(){
-        background.renderImage();
+        scenario1.renderImage();
 
     }
 
     update(){
-        background.update(this.speed)
+        scenario1.update(this.speed)
     }
 }
 
