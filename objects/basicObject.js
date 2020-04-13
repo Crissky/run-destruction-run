@@ -1,8 +1,8 @@
 export class BasicObject {
-    constructor(sprites, spriteX, spriteY, width, height, posX, posY, canvas, context) {
+    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, context) {
         this.sprites = sprites;
-        this.spriteX = spriteX;
-        this.spriteY = spriteY;
+        this.sourceX = sourceX;
+        this.sourceY = sourceY;
         this.width = width;
         this.height = height;
         this.posX = posX;
@@ -13,14 +13,15 @@ export class BasicObject {
 
     renderImage() {
         this.context.drawImage(this.sprites, 
-            this.spriteX, this.spriteY, 
+            this.sourceX, this.sourceY, 
             this.width, this.height, 
-            this.posX, this.posY,
-            this.width, this.height);
+            this.posX + this.width, this.posY + this.height,
+            this.width, this.height
+        );
     }
 
     update() {
         this.renderImage();
-    };
+    }
 
-};
+}
