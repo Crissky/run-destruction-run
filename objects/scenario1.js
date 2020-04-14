@@ -44,7 +44,6 @@ export class Scenario1 {
     }
     removeScenarioElement(model){
         if(model.list[0].posX <= -(model.maxWidth)) {
-            console.log(model);
             model.list.shift();
             this.putScenarioElement(model);
         }
