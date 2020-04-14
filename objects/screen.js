@@ -1,8 +1,11 @@
 import { Scenario1 } from "./scenario1.js";
 import { Char } from "./char.js";
 
-const scenario1 = new Scenario1();
-const char = new Char(45, 0, 45, 41, 30, 320);
+const canvas = document.querySelector('canvas');
+const context = canvas.getContext('2d');
+
+const scenario1 = new Scenario1(canvas, context);
+const char = new Char(45, 0, 45, 41, 30, 320, canvas, context);
 
 class GameStart {
     constructor(){
