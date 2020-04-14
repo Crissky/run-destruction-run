@@ -1,11 +1,11 @@
 import { Scenario1 } from "./scenario1.js";
-import { Char } from "./char.js";
+import { Char } from "./oldMan.js";
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 const scenario1 = new Scenario1(canvas, context);
-const char = new Char(45, 0, 45, 41, 30, 320, canvas, context);
+const char = new Char(45, 0, 45, 41, 30, 361, canvas, context);
 
 class GameStart {
     constructor(){
@@ -35,6 +35,23 @@ class GamePlay {
 
     update(){
         scenario1.update(this.speed)
+        char.update()
+    }
+
+    moveLeft() {
+        char.moveLeft();
+    }
+
+    moveUp() {
+        char.moveUp();
+    }
+
+    moveRight() {
+        char.moveRight();
+    }
+
+    moveDown() {
+        char.moveDown();
     }
 }
 
@@ -59,5 +76,5 @@ export class Screen {
         this.gameStart = new GameStart();
         this.gamePlay = new GamePlay();
         this.gameOver = new GameOver();
-    }
+    }    
 }

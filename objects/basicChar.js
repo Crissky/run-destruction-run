@@ -1,34 +1,39 @@
 import { BasicObject } from "./basicObject.js"
 
 
-function getKey () {
-    key = 0
-    window.addEventListener('keydown', function (e) {
-        key = e.keyCode;
-    })    
-    return key
-}
-
-
-
-
 export class BasicChar extends BasicObject{
-    constructor(){
-        super(sprites, sourceX, sourceY, width, height, posX, posY, canvas, context)
-
-    }
-    moveUp() {
-
+    constructor(sprite, sourceX, sourceY, width, height, posX, posY, canvas, context){
+        super(sprite, sourceX, sourceY, width, height, posX, posY, canvas, context)
+        this.speedX = 0;
+        this.speedY = 0;
     }
 
-    moveDown() {
-
+    update(){
+        if (this.posX < 0 && this.speedX < 0) {
+            this.speedX = 0;
+            this.posX = 0;
+        }
+        if ((this.posX + this.width) > this.canvas.width && this.speedX > 0) {
+            this.speedX = 0;
+            this.posX = this.canvas.width - this.width;
+        }
+        this.posX += this.speedX;
+        this.posY += this.speedY
     }
 
     moveLeft() {
-        
+        this.speedX -= 1
     }
-    moveRight() {
 
+    moveUp() {
+        this.speedY -= 1
+    }
+
+    moveRight() {
+         this.speedX += 1
+    }
+
+    moveDown() {
+        this.speedY += 1
     }
 }
