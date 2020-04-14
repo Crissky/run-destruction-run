@@ -4,57 +4,70 @@ const scenario = new Image();
 scenario.src = '../sprites/scenario.png';
 
 export class Scenario1 {
-    constructor(canvas, context){
-        this.listSky = [new BasicBackground(scenario, 3, 3, 511, 296, 0, 0,canvas, context)]
-        this.listFloor = [new BasicBackground(scenario, 3, 299, 512, 323, 0, (canvas.height - 323),canvas, context)]
-        this.maxWidthSky = ((Math.ceil((canvas.width / 511)) + 1) * 511);
-        this.maxWidthFloor = ((Math.ceil((canvas.width / 512)) + 1) * 512);
+    constructor(canvas, context) {
+        this.sky = {
+            sourceX: 3,
+            sourceY: 3,
+            width: 511,
+            height: 296,
+            posX: 0,
+            posY: 0,
+            maxWidth: ((Math.ceil((canvas.width / 511)) + 1) * 511),
+            sprite: scenario,
+            list: [],
+        }
+        this.floor = {
+            sourceX: 3,
+            sourceY: 299,
+            width: 512,
+            height: 323,
+            posX: 0,
+            posY: (canvas.height - 323),
+            maxWidth: ((Math.ceil((canvas.width / 512)) + 1) * 512),
+            sprite: scenario,
+            list: [],
+        }
+        this.canvas = canvas;
+        this.context = context;
     }
-
-    getScenarioSky(){
-        return new BasicBackground(scenario, 3, 3, 511, 296, this.maxWidthSky, 0,canvas, context);
+    getScenarioElement(model) {
+        return new BasicBackground(model.sprite, model.sourceX, model.sourceY, model.width, model.height, model.posX, model.posY, this.canvas, this.context);
     }
-    
-    getScenarioFloor(){
-        return new BasicBackground(scenario, 3, 299, 512, 323, this.maxWidthFloor, (canvas.height - 323), canvas, context);
+    putScenarioElement(model){
+        if(model.list.length < 2) {
+            var newElement = this.getScenarioElement(model);
+            model.list.push(newElement);
+            if(model.list.length > 1){
+                model.list[1].posX = model.maxWidth + model.list[0].posX;
+            }
+        }
     }
-
+    removeScenarioElement(model){
+        if(model.list[0].posX <= -(model.maxWidth)) {
+            console.log(model);
+            model.list.shift();
+            this.putScenarioElement(model);
+        }
+    }
     renderImage(){
-        for(let index = 0; index < this.listSky.length; index++){
-            this.listSky[index].renderImage();
+        for(let index = 0; index < this.sky.list.length; index++){
+            this.sky.list[index].renderImage();
         }
 
-        for(let index = 0; index < this.listFloor.length; index++){
-            this.listFloor[index].renderImage();
+        for(let index = 0; index < this.floor.list.length; index++){
+            this.floor.list[index].renderImage();
         }
     }
 
     update(speedScreen){
-        if (this.listSky.length < 2) {
-            this.listSky.push(this.getScenarioSky());
-        }
-        if (this.listFloor.length < 2) {
-            this.listFloor.push(getScenarioFloor());
-        }
-        if(this.listSky[0].posX <= -(this.maxWidthSky)){
-            let posX = this.listSky[0].posX;
-            this.listSky.shift();
+        this.putScenarioElement(this.sky);
+        this.putScenarioElement(this.floor);
+        this.removeScenarioElement(this.sky);
+        this.removeScenarioElement(this.floor);
 
-            
-            this.listSky.push(getScenarioSky());
-            this.listSky[1].posX = (this.listSky[1].posX + (posX + this.listSky[1].posX));
-        }
-
-         if(this.listFloor[0].posX <= -(this.maxWidthFloor)){
-            let posX = this.listFloor[0].posX;
-            this.listFloor.shift();
-            this.listFloor.push(getScenarioFloor());
-            this.listFloor[1].posX = this.listFloor[1].posX + (posX + this.listFloor[1].posX);
-        }
-
-        for (let index = 0; index < this.listFloor.length; index++) {
-            this.listSky[index].posX -= Math.ceil(speedScreen/2);
-            this.listFloor[index].posX -= speedScreen 
+        for (let index = 0; index < this.floor.list.length; index++) {
+            this.sky.list[index].posX -= Math.ceil(speedScreen/2);
+            this.floor.list[index].posX -= speedScreen 
         }
     }
 
