@@ -1,18 +1,15 @@
-const canvas = document.querySelector('canvas');
-const context = canvas.getContext('2d');
+import { BasicElement } from "./basicElement.js";
+
 const scenario = new Image();
 scenario.src = '../sprites/scenario.png';
 
-export class floor1 {
-        constructor(canvas) {
-            this.sourceX =  3;
-            this.sourceY =  299;
-            this.width =  512;
-            this.height = 323;
-            this.posX = 0;
-            this.posY = (canvas.height - 323);
-            this.maxWidth = ((Math.ceil((canvas.width / 512)) + 1) * 512);
-            this.sprite = scenario;
-            this.list = [];
+export class Floor1 extends BasicElement{
+    constructor(canvas, speedMultiplier=1, updateWaitTime=0) {
+        super(scenario,
+            3, 299,
+            512, 323,
+            0, (canvas.height - 323),
+            canvas,
+            speedMultiplier, updateWaitTime);
     }
 }

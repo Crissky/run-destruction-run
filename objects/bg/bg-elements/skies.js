@@ -1,18 +1,16 @@
-const canvas = document.querySelector('canvas');
-const context = canvas.getContext('2d');
+import { BasicElement } from "./basicElement.js";
+
 const scenario = new Image();
 scenario.src = '../sprites/scenario.png';
 
-export class sky1 {
-    constructor(canvas){
-        this.sourceX = 3;
-        this.sourceY = 3;
-        this.width = 511;
-        this.height = 296;
-        this.posX = 0;
-        this.posY = 0;
-        this.maxWidth = ((Math.ceil((canvas.width / 511)) + 1) * 511);
-        this.sprite = scenario;
-        this.list = [];
+export class Sky1 extends BasicElement{
+    constructor(canvas, speedMultiplier=0.5, updateWaitTime=15) {
+        super(scenario,
+            3, 3,
+            511, 296,
+            0, 0,
+            canvas,
+            speedMultiplier, updateWaitTime);
     }
+    
 }
