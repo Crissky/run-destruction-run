@@ -1,4 +1,4 @@
-import { BasicObject } from "./basicObject.js"
+import { BasicObject } from "../basicObject.js"
 
 
 export class BasicChar extends BasicObject{
@@ -9,11 +9,11 @@ export class BasicChar extends BasicObject{
     }
 
     update(){
-        if (this.posX < 0 && this.speedX < 0) {
+        if (this.posX <= 0 && this.speedX < 0) {
             this.speedX = 0;
             this.posX = 0;
         }
-        if ((this.posX + this.width) > this.canvas.width && this.speedX > 0) {
+        if ((this.posX + this.width) >= this.canvas.width && this.speedX > 0) {
             this.speedX = 0;
             this.posX = this.canvas.width - this.width;
         }
@@ -21,19 +21,34 @@ export class BasicChar extends BasicObject{
         this.posY += this.speedY
     }
 
-    moveLeft() {
-        this.speedX -= 1
+    keydownLeft() {
+        this.speedX = -4
     }
 
-    moveUp() {
-        this.speedY -= 1
+    keydownUp() {
+        this.speedY = 0
     }
 
-    moveRight() {
-         this.speedX += 1
+    keydownRight() {
+         this.speedX = 3
     }
 
-    moveDown() {
-        this.speedY += 1
+    keydownDown() {
+        this.speedY = 0
+    }
+    keyupLeft() {
+        this.speedX = 0
+    }
+
+    keyupUp() {
+        this.speedY = 0
+    }
+
+    keyupRight() {
+         this.speedX = 0
+    }
+
+    keyupDown() {
+        this.speedY = 0
     }
 }

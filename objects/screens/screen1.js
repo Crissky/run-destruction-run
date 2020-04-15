@@ -1,5 +1,5 @@
-import { Scenario1 } from "./scenario1.js";
-import { Char } from "./oldMan.js";
+import { Scenario1 } from "../scenarios/scenario1.js";
+import { Char } from "../chars/oldMan.js";
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
@@ -38,20 +38,36 @@ class GamePlay {
         char.update()
     }
 
-    moveLeft() {
-        char.moveLeft();
+    keydownLeft() {
+        char.keydownLeft();
     }
 
-    moveUp() {
-        char.moveUp();
+    keydownUp() {
+        char.keydownUp();
     }
 
-    moveRight() {
-        char.moveRight();
+    keydownRight() {
+        char.keydownRight();
     }
 
-    moveDown() {
-        char.moveDown();
+    keydownDown() {
+        char.keydownDown();
+    }
+    
+    keyupLeft() {
+        char.keyupLeft();
+    }
+
+    keyupUp() {
+        char.keyupUp();
+    }
+
+    keyupRight() {
+        char.keyupRight();
+    }
+
+    keyupDown() {
+        char.keyupDown();
     }
 }
 

@@ -1,4 +1,4 @@
-import { BasicObject } from "./basicObject.js";
+import { BasicObject } from "../basicObject.js";
 
 export class BasicBackground extends BasicObject{
     constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, context){

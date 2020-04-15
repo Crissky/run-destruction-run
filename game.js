@@ -1,4 +1,4 @@
-import { Screen } from "./objects/screen.js";
+import { Screen } from "./objects/screens/screen1.js";
 
 const screen = new Screen();
 
@@ -7,22 +7,42 @@ window.addEventListener('keydown', function (e) {
   var key = e.keyCode;
 
     if (key == 37) {
-        screen.gamePlay.moveLeft();
+        screen.gamePlay.keydownLeft();
      }
 
     if (key == 38) {
-        screen.gamePlay.moveUp();
+        screen.gamePlay.keydownUp();
     }
 
     if (key == 39) {
-        screen.gamePlay.moveRight();
+        screen.gamePlay.keydownRight();
     }
 
     if (key == 40) {
-        screen.gamePlay.moveDown();
+        screen.gamePlay.keydownDown();
     }
 })    
 
+window.addEventListener('keyup', function (e) {
+    var key = e.keyCode;
+  
+      if (key == 37) {
+          screen.gamePlay.keyupLeft();
+       }
+  
+      if (key == 38) {
+          screen.gamePlay.keyupUp();
+      }
+  
+      if (key == 39) {
+          screen.gamePlay.keyupRight();
+      }
+  
+      if (key == 40) {
+          screen.gamePlay.keyupDown();
+      }
+  })    
+  
 
 function loop() {
     screen.gamePlay.update();

@@ -1,32 +1,14 @@
-import { BasicBackground } from './basicBackground.js'
+import { BasicBackground } from '../bg/basicBackground.js'
+import { floor1 } from "../bg/bg-elements/floors.js";
+import { sky1 } from "../bg/bg-elements/skies.js";
 
 const scenario = new Image();
 scenario.src = '../sprites/scenario.png';
 
 export class Scenario1 {
     constructor(canvas, context) {
-        this.sky = {
-            sourceX: 3,
-            sourceY: 3,
-            width: 511,
-            height: 296,
-            posX: 0,
-            posY: 0,
-            maxWidth: ((Math.ceil((canvas.width / 511)) + 1) * 511),
-            sprite: scenario,
-            list: [],
-        }
-        this.floor = {
-            sourceX: 3,
-            sourceY: 299,
-            width: 512,
-            height: 323,
-            posX: 0,
-            posY: (canvas.height - 323),
-            maxWidth: ((Math.ceil((canvas.width / 512)) + 1) * 512),
-            sprite: scenario,
-            list: [],
-        }
+        this.sky = new sky1(canvas);
+        this.floor = new floor1(canvas);
         this.canvas = canvas;
         this.context = context;
     }
