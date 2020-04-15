@@ -12,5 +12,4 @@ export class Sky1 extends BasicElement{
             canvas,
             speedMultiplier, updateWaitTime);
     }
-    
 }
