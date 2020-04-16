@@ -2,8 +2,8 @@ import { BasicObject } from "../basicObject.js"
 
 
 export class BasicChar extends BasicObject{
-    constructor(sprite, sourceX, sourceY, width, height, posX, posY, canvas, context){
-        super(sprite, sourceX, sourceY, width, height, posX, posY, canvas, context)
+    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier=1){
+        super(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier)
         this.speedX = 0;
         this.speedY = 0;
     }

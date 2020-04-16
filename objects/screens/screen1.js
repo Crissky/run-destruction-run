@@ -5,7 +5,7 @@ const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 const scenario1 = new Scenario1(canvas, context);
-const char = new Char(45, 0, 45, 41, 30, 361, canvas, context);
+const char = new Char(45, 0, 45, 41, 30, 361, canvas);
 
 class GameStart {
     constructor(){
@@ -27,7 +27,8 @@ class GamePlay {
         this.speed = 2;
     }
 
-    renderImage(){
+    renderImage() {
+        context.clearRect(0,0,canvas.width, canvas.height); // Clean Screen
         scenario1.renderImage();
         char.renderImage();
 

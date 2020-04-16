@@ -5,18 +5,17 @@ oldman.src = '../sprites/oldman.png';
 
 
 export class Char extends BasicChar{
-    constructor(sourceX, sourceY, width, height, posX, posY, canvas, context){
-        super(oldman, sourceX, sourceY, width, height, posX, posY, canvas, context)
-    this.currentFrame = 0;
-    this.maxFrame = 8;
-    this.frameTime = 0;
-    this.maxFrameTime = 5;
-    this.multShadowPosX = 0.4;
-    this.multShadowPosY = 1;
-    this.multShadowWidth = 3;
-    this.multShadowHeight = 8;
-    this.multShadowRotate = 2;
-
+    constructor(sourceX, sourceY, width, height, posX, posY, canvas){
+        super(oldman, sourceX, sourceY, width, height, posX, posY, canvas);
+        this.currentFrame = 0;
+        this.maxFrame = 8;
+        this.frameTime = 0;
+        this.maxFrameTime = 5;
+        this.multShadowPosX = 0.4;
+        this.multShadowPosY = 1;
+        this.multShadowWidth = 3;
+        this.multShadowHeight = 8;
+        this.multShadowRotate = 2;
     }
 
     createShadow(context) {
@@ -40,8 +39,8 @@ export class Char extends BasicChar{
         this.context.drawImage(this.sprites, 
             (this.sourceX * this.currentFrame), this.sourceY, 
             this.width, this.height, 
-            this.posX, this.posY,
-            this.width, this.height
+            this.posX , (this.posY - (this.height * (this.sizeMultiplier-1))),
+            this.getTrueWidth(), this.getTrueHeight()
         );
     }
 }

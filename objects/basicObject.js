@@ -1,5 +1,5 @@
 export class BasicObject {
-    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, context) {
+    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier=1) {
         this.sprites = sprites;
         this.sourceX = sourceX;
         this.sourceY = sourceY;
@@ -8,15 +8,16 @@ export class BasicObject {
         this.posX = posX;
         this.posY = posY;
         this.canvas = canvas;
-        this.context = context;
+        this.context = canvas.getContext('2d');
+        this.sizeMultiplier = sizeMultiplier;
     }
 
     renderImage() {
         this.context.drawImage(this.sprites, 
             this.sourceX, this.sourceY, 
             this.width, this.height, 
-            this.posX + this.width, this.posY + this.height,
-            this.width, this.height
+            this.posX, this.posY,
+            this.getTrueWidth(), this.getTrueHeight()
         );
     }
 
@@ -24,4 +25,10 @@ export class BasicObject {
         this.renderImage();
     }
 
+    getTrueWidth(){
+        return Math.floor(this.width * this.sizeMultiplier);
+    }
+    getTrueHeight(){
+        return Math.floor(this.height * this.sizeMultiplier);
+    }
 }

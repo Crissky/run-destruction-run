@@ -1,53 +1,45 @@
-import { BasicBackground } from '../bg/basicBackground.js'
-import { Floor1 } from "../bg/bg-elements/floors.js";
-import { Sky1 } from "../bg/bg-elements/skies.js";
+import { BackgroundSky1 } from '../bg/backgroundSkies.js';
+import { BackgroundFloor1 } from '../bg/backgroundFloors.js';
 
 const scenario = new Image();
 scenario.src = '../sprites/scenario.png';
 
 export class Scenario1 {
     constructor(canvas, context) {
-        this.elements = [new Sky1(canvas), new Floor1(canvas, 1)];
+        this.backgroundList = [new BackgroundSky1(canvas, 0.65), new BackgroundFloor1(canvas)];
         this.canvas = canvas;
         this.context = context;
     }
-    getScenarioElement(model) {
-        return new BasicBackground(model.sprite,
-            model.sourceX, model.sourceY,
-            model.width, model.height, 
-            model.posX, model.posY, 
-            this.canvas, this.context);
-    }
-    putScenarioElement(model){
-        if(model.list.length < 2) {
-            var newElement = this.getScenarioElement(model);
-            model.list.push(newElement);
-            if(model.list.length > 1){
-                model.list[1].posX = model.maxWidth + model.list[0].posX;
+
+    putBackgroundElement(background){
+        if(background.elementList.length < background.getMaxNumHorizontalElements()) {
+            var newElement = background.createElement();
+            background.elementList.push(newElement);
+            if(background.elementList.length > 1) {
+                let lastIndex = (background.elementList.length - 1);
+                background.elementList[lastIndex].posX = background.elementList[(lastIndex-1)].posX + background.elementList[(lastIndex-1)].getTrueWidth() - 1;
             }
         }
     }
-    removeScenarioElement(model){
-        if(model.list[0].posX <= -(model.maxWidth)) {
-            model.list.shift();
-            this.putScenarioElement(model);
+
+    removeBackgroundElement(background){
+        if(background.elementList[0].posX <= -(background.elementList[0].getTrueWidth())) {
+            background.elementList.shift();
+            this.putBackgroundElement(background);
         }
     }
+
     renderImage(){
-        for(let index1 = 0; index1 < this.elements.length; index1++) {
-            for (let index2 = 0; index2 < this.elements[index1].list.length; index2++) {
-                this.elements[index1].list[index2].renderImage();
-                console.log(this.elements[index1].list[index2]);
-            }
-        }
+        this.backgroundList.forEach(background => {
+            background.renderImage();
+        });
     }
 
     update(speedScreen){
-        for (let index = 0; index < this.elements.length; index++) {
-            this.putScenarioElement(this.elements[index]);
-            this.removeScenarioElement(this.elements[index]);
-            this.elements[index].update(speedScreen);
-        }
+        this.backgroundList.forEach(background => {
+            this.putBackgroundElement(background);
+            this.removeBackgroundElement(background);
+            background.update(speedScreen);
+        });
     }
-
 }
