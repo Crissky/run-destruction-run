@@ -9,6 +9,7 @@ export class BasicChar extends BasicObject{
         this.gravity = 0.1;
         this.floorHeight = posY;
         this.status = this.setStatus.RUN;
+        this.fixedSpeedY = 4.5;
     }
 
     update(){
@@ -56,9 +57,9 @@ export class BasicChar extends BasicObject{
         } else if (this.status == this.setStatus.JUMP) {
             this.status = this.setStatus.DOUBLEJUMP;
             if (this.speedY > 0) {
-                this.speedY = -3;
+                this.speedY = -2.8;
             } else {
-                this.speedY -= 3;
+                this.speedY -= 2.8;
             }            
         }
     }
@@ -68,9 +69,8 @@ export class BasicChar extends BasicObject{
     }
 
     keydownDown() {
-        let fixedSpeedY = 4.5;
-        if (this.isJump() && this.speedY < fixedSpeedY) {
-            this.speedY = fixedSpeedY;
+        if (this.isJump() && this.speedY < this.fixedSpeedY) {
+            this.speedY = this.fixedSpeedY;
         }
     }
     keyupLeft() {

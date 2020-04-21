@@ -45,13 +45,20 @@ export class Char extends BasicChar{
         context.restore();
     }
 
-    renderImage() {
+    updateFrame() {
         this.frameTime++
         if (this.frameTime >= this.maxFrameTime) {
             this.frameTime = 0;
             this.currentFrame = ++this.currentFrame%this.maxFrame
+            if (this.isJump() && this.speedY >= this.fixedSpeedY) {
+                this.currentFrame = 4;
+            }
         }
-        this.createShadow(this.context)
+    }
+
+    renderImage() {
+        this.updateFrame();
+        this.createShadow(this.context);
         this.context.drawImage(this.getImage(), 
             (this.sourceX * this.currentFrame), this.sourceY, 
             this.width, this.height, 
