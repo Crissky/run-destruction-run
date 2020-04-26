@@ -2,14 +2,18 @@ import { BasicObject } from "../basicObject.js"
 
 
 export class BasicChar extends BasicObject{
-    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier=1){
-        super(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier)
+    constructor(sprites, canvas, sourceX, sourceY, width, height, posX, posY, speedBack, speedFront, gravity=0.1, keydownJumpSpeedY=4.5, jumpSpeedY=3.5, doublejumpSpeedY=2.8, sizeMultiplier=1){
+        super(sprites, canvas, sourceX, sourceY, width, height, posX, posY, sizeMultiplier)
         this.speedX = 0;
         this.speedY = 0;
-        this.gravity = 0.1;
+        this.speedFront = speedFront;
+        this.speedBack = speedBack;
+        this.gravity = gravity;
         this.floorHeight = posY;
         this.status = this.setStatus.RUN;
-        this.fixedSpeedY = 4.5;
+        this.keydownJumpSpeedY = keydownJumpSpeedY;
+        this.jumpSpeedY = jumpSpeedY;
+        this.doublejumpSpeedY = doublejumpSpeedY;
     }
 
     update(){
@@ -17,9 +21,9 @@ export class BasicChar extends BasicObject{
             this.speedX = 0;
             this.posX = 0;
         }
-        if ((this.posX + this.width) >= this.canvas.width && this.speedX > 0) {
+        if ((this.posX + this.getTrueWidth()) >= this.canvas.width && this.speedX > 0) {
             this.speedX = 0;
-            this.posX = this.canvas.width - this.width;
+            this.posX = this.canvas.width - this.getTrueWidth();
         }
         if (this.isJump()) {
             this.speedY += this.gravity;
@@ -47,41 +51,38 @@ export class BasicChar extends BasicObject{
     }
 
     keydownLeft() {
-        this.speedX = -4;
+        this.speedX = -this.speedBack;
+    }
+
+    keydownRight() {
+         this.speedX = this.speedFront;
     }
 
     keydownUp() {
         if (this.status == this.setStatus.STAND || this.status == this.setStatus.RUN || this.status == this.setStatus.CROUCH) {
             this.status = this.setStatus.JUMP;
-            this.speedY = -3.5;
+            this.speedY = -this.jumpSpeedY;
         } else if (this.status == this.setStatus.JUMP) {
             this.status = this.setStatus.DOUBLEJUMP;
-            if (this.speedY > 0) {
-                this.speedY = -2.8;
-            } else {
-                this.speedY -= 2.8;
-            }            
+            this.speedY = -this.doublejumpSpeedY;
         }
-    }
-
-    keydownRight() {
-         this.speedX = 3;
     }
 
     keydownDown() {
-        if (this.isJump() && this.speedY < this.fixedSpeedY) {
-            this.speedY = this.fixedSpeedY;
+        if (this.isJump() && this.speedY < this.keydownJumpSpeedY) {
+            this.speedY = this.keydownJumpSpeedY;
         }
     }
+
     keyupLeft() {
         this.speedX = 0;
     }
-
-    keyupUp() {
-    }
-
+    
     keyupRight() {
          this.speedX = 0;
+    }
+
+    keyupUp() {
     }
 
     keyupDown() {

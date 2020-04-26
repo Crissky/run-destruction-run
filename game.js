@@ -1,4 +1,4 @@
-import { Screen } from "./objects/screens/screen1.js";
+import { Screen } from "./classes/screens/screen1.js";
 
 const screen = new Screen();
 

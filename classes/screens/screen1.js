@@ -5,7 +5,7 @@ const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 const scenario1 = new Scenario1(canvas, context);
-const char = new Char(45, 0, 45, 41, 30, 361, canvas);
+const char = new Char(canvas, 45, 0, 45, 41, 30, 361);
 
 class GameStart {
     constructor(){
@@ -43,12 +43,12 @@ class GamePlay {
         char.keydownLeft();
     }
 
-    keydownUp() {
-        char.keydownUp();
-    }
-
     keydownRight() {
         char.keydownRight();
+    }
+
+    keydownUp() {
+        char.keydownUp();
     }
 
     keydownDown() {
@@ -59,12 +59,12 @@ class GamePlay {
         char.keyupLeft();
     }
 
-    keyupUp() {
-        char.keyupUp();
-    }
-
     keyupRight() {
         char.keyupRight();
+    }
+    
+    keyupUp() {
+        char.keyupUp();
     }
 
     keyupDown() {
@@ -86,7 +86,6 @@ class GameOver {
         scenario1.update(this.speed)
     }
 }
-
 
 export class Screen {
     constructor(){     

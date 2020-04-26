@@ -1,5 +1,3 @@
-import { BasicObject } from "../basicObject.js";
-
 export class BasicBackground {
     constructor(canvas, elementClass, sizeMultiplier=1, speedMultiplier=1, updateWaitTime=0) {
         this.canvas = canvas;

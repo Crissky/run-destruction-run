@@ -1,5 +1,5 @@
 export class BasicObject {
-    constructor(sprites, sourceX, sourceY, width, height, posX, posY, canvas, sizeMultiplier=1) {
+    constructor(sprites, canvas, sourceX, sourceY, width, height, posX, posY, sizeMultiplier=1) {
         this.sprites = sprites;
         this.sourceX = sourceX;
         this.sourceY = sourceY;
@@ -28,7 +28,11 @@ export class BasicObject {
     getTrueWidth(){
         return Math.floor(this.width * this.sizeMultiplier);
     }
+
     getTrueHeight(){
         return Math.floor(this.height * this.sizeMultiplier);
     }
+
+    debugRect() { }
+
 }
