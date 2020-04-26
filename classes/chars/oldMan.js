@@ -12,6 +12,7 @@ export class Char extends BasicChar{
         super(oldmanRun, canvas, sourceX, sourceY, width, height, posX, posY, 4, 3, 0.1, 4.5, 3.5, 2.8, 1);
         this.debugMode = debug;
         this.shadowHeight = height;
+        this.shadowWidth = this.getTrueWidth();
         this.maxFrame = 8;
         this.currentFrame = 0;
         this.frameTime = 0;
@@ -44,8 +45,8 @@ export class Char extends BasicChar{
         this.context.globalAlpha = 0.5; 
         this.context.fillStyle = 'black'; 
         this.context.beginPath();
-        this.context.ellipse(this.posX + (this.getTrueWidth() * this.multShadowPosX), (this.floorHeight + (this.shadowHeight * this.multShadowPosY)), 
-                            (this.getTrueWidth() / this.multShadowWidth), (this.shadowHeight / this.multShadowHeight), 0, 0, (Math.PI * this.multShadowRotate));
+        this.context.ellipse(this.posX + (this.shadowWidth * this.multShadowPosX), (this.floorHeight + (this.shadowHeight * this.multShadowPosY)), 
+                            (this.shadowWidth / this.multShadowWidth), (this.shadowHeight / this.multShadowHeight), 0, 0, (Math.PI * this.multShadowRotate));
         this.context.fill();
         this.context.restore();
     }
