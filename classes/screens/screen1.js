@@ -1,11 +1,13 @@
 import { Scenario1 } from "../scenarios/scenario1.js";
-import { Char } from "../chars/oldMan.js";
+import { OldMan } from "../chars/oldMan.js";
+import { MotorSoldier } from "../chars/motorSoldier.js";
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
 
 const scenario1 = new Scenario1(canvas, context);
-const char = new Char(canvas, 45, 0, 45, 41, 30, 361);
+const oldman = new OldMan(canvas, 45, 0, 45, 41, 30, 361);
+const motorSoldier = new MotorSoldier(canvas, 57, 0, 57, 42, 100, 361)
 
 class GameStart {
     constructor(){
@@ -30,45 +32,47 @@ class GamePlay {
     renderImage() {
         context.clearRect(0,0,canvas.width, canvas.height); // Clean Screen
         scenario1.renderImage();
-        char.renderImage();
+        oldman.renderImage();
+        motorSoldier.renderImage();
 
     }
 
     update(){
-        scenario1.update(this.speed)
-        char.update()
+        scenario1.update(this.speed);
+        oldman.update();
+        motorSoldier.update();
     }
 
     keydownLeft() {
-        char.keydownLeft();
+        oldman.keydownLeft();
     }
 
     keydownRight() {
-        char.keydownRight();
+        oldman.keydownRight();
     }
 
     keydownUp() {
-        char.keydownUp();
+        oldman.keydownUp();
     }
 
     keydownDown() {
-        char.keydownDown();
+        oldman.keydownDown();
     }
     
     keyupLeft() {
-        char.keyupLeft();
+        oldman.keyupLeft();
     }
 
     keyupRight() {
-        char.keyupRight();
+        oldman.keyupRight();
     }
     
     keyupUp() {
-        char.keyupUp();
+        oldman.keyupUp();
     }
 
     keyupDown() {
-        char.keyupDown();
+        oldman.keyupDown();
     }
 }
 

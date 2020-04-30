@@ -7,7 +7,7 @@ const oldmanJump = new Image();
 oldmanJump.src = '../sprites/oldman-jump.png';
 
 
-export class Char extends BasicChar{
+export class OldMan extends BasicChar{
     constructor(canvas, sourceX, sourceY, width, height, posX, posY, debug=true){
         super(oldmanRun, canvas, sourceX, sourceY, width, height, posX, posY, 4, 3, 0.1, 4.5, 3.5, 2.8, 1);
         this.debugMode = debug;
@@ -16,12 +16,7 @@ export class Char extends BasicChar{
         this.maxFrame = 8;
         this.currentFrame = 0;
         this.frameTime = 0;
-        this.maxFrameTime = 6 * (this.sizeMultiplier);
-        this.multShadowPosX = 0.4;
-        this.multShadowPosY = 1;
-        this.multShadowWidth = 3;
-        this.multShadowHeight = 8;
-        this.multShadowRotate = 2;   
+        this.maxFrameTime = 6 * (this.sizeMultiplier);  
     }
 
     getImage(){
@@ -40,17 +35,6 @@ export class Char extends BasicChar{
         return sprite;
     }
 
-    createShadow() {
-        this.context.save();
-        this.context.globalAlpha = 0.5; 
-        this.context.fillStyle = 'black'; 
-        this.context.beginPath();
-        this.context.ellipse(this.posX + (this.shadowWidth * this.multShadowPosX), (this.floorHeight + (this.shadowHeight * this.multShadowPosY)), 
-                            (this.shadowWidth / this.multShadowWidth), (this.shadowHeight / this.multShadowHeight), 0, 0, (Math.PI * this.multShadowRotate));
-        this.context.fill();
-        this.context.restore();
-    }
-
     updateFrame() {
         this.frameTime++
         if (this.frameTime >= this.maxFrameTime) {
@@ -64,7 +48,7 @@ export class Char extends BasicChar{
 
     renderImage() {
         this.updateFrame();
-        this.createShadow();
+        this.createShadow(this.shadowWidth, this.shadowHeight, 0.4, 1, 3, 8, 2);
         this.context.drawImage(this.getImage(), 
             (this.sourceX * this.currentFrame), this.sourceY, 
             this.width, this.height, 

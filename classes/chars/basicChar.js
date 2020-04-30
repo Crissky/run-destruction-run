@@ -37,6 +37,17 @@ export class BasicChar extends BasicObject{
         this.posY += this.speedY;
     }
 
+    createShadow(shadowWidth, shadowHeight, multShadowPosX, multShadowPosY, multShadowWidth, multShadowHeight, multShadowRotate) {
+        this.context.save();
+        this.context.globalAlpha = 0.5; 
+        this.context.fillStyle = 'black'; 
+        this.context.beginPath();
+        this.context.ellipse(this.posX + (shadowWidth * multShadowPosX), (this.floorHeight + (shadowHeight * multShadowPosY)), 
+                            (shadowWidth / multShadowWidth), (shadowHeight / multShadowHeight), 0, 0, (Math.PI * multShadowRotate));
+        this.context.fill();
+        this.context.restore();
+    }
+
     isJump(){
         return (this.status == this.setStatus.JUMP || this.status == this.setStatus.DOUBLEJUMP);
     }
