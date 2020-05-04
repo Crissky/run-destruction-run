@@ -2,7 +2,7 @@ import { BackgroundSky1 } from '../bg/backgroundSkies.js';
 import { BackgroundFloor1 } from '../bg/backgroundFloors.js';
 
 const scenario = new Image();
-scenario.src = '../sprites/scenario.png';
+scenario.src = './sprites/scenario.png';
 
 export class Scenario1 {
     constructor(canvas, context) {

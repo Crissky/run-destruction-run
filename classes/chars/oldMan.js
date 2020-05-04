@@ -1,10 +1,10 @@
 import { BasicChar } from "./basicChar.js"
 
 const oldmanRun = new Image();
-oldmanRun.src = '../sprites/oldman.png';
+oldmanRun.src = './sprites/oldman.png';
 
 const oldmanJump = new Image();
-oldmanJump.src = '../sprites/oldman-jump.png';
+oldmanJump.src = './sprites/oldman-jump.png';
 
 
 export class OldMan extends BasicChar{
