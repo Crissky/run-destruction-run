@@ -1,7 +1,7 @@
 import { BasicObject } from "../../basicObject.js";
 
 const scenario = new Image();
-scenario.src = '../sprites/scenario.png';
+scenario.src = './run-destruction-run/sprites/scenario.png';
 
 export class Floor1 extends BasicObject{
     constructor(canvas, sizeMultiplier) {
