@@ -1,7 +1,7 @@
 import { BasicChar } from "./basicChar.js"
 
 const motoJumper = new Image();
-motoJumper.src = './run-destruction-run/sprites/moto-jumper.png';
+motoJumper.src = './sprites/moto-jumper.png';
 
 export class MotorSoldier extends BasicChar{
     constructor(canvas, sourceX, sourceY, width, height, posX, posY, debug=true){
