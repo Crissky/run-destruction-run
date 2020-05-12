@@ -1,4 +1,4 @@
-import { BasicChar } from "./basicChar.js"
+import { BasicChar } from "../basicChar.js"
 
 const oldmanRun = new Image();
 oldmanRun.src = './sprites/oldman.png';
@@ -8,31 +8,28 @@ oldmanJump.src = './sprites/oldman-jump.png';
 
 
 export class OldMan extends BasicChar{
-    constructor(canvas, sourceX, sourceY, width, height, posX, posY, debug=true){
-        super(oldmanRun, canvas, sourceX, sourceY, width, height, posX, posY, 4, 3, 0.1, 4.5, 3.5, 2.8, 1);
+    constructor(canvas, posX, posY, debug=true){
+        super(oldmanRun, canvas, 0, 0, 0, 0, posX, posY, 4, 3, 0.1, 4.5, 3.5, 2.8, 1);
+        this.setImage();
         this.debugMode = debug;
-        this.shadowHeight = height;
-        this.shadowWidth = this.getTrueWidth();
         this.maxFrame = 8;
         this.currentFrame = 0;
         this.frameTime = 0;
-        this.maxFrameTime = 6 * (this.sizeMultiplier);  
+        this.maxFrameTime = 6 * (this.sizeMultiplier);
+          
     }
-
-    getImage(){
-        let sprite;
+    
+    setImage(){
         if (this.status == this.setStatus.RUN) {
             this.maxFrame = 8;
-            this.height = 41;
-            sprite = oldmanRun;
+            this.sprites = oldmanRun;
         }
         if (this.isJump()) {
             this.maxFrame = 5;
-            this.height = 44;
-            sprite = oldmanJump;
+            this.sprites = oldmanJump;
         }
+        this.setWidthImage();
         this.currentFrame = this.currentFrame % this.maxFrame;
-        return sprite;
     }
 
     updateFrame() {
@@ -48,8 +45,9 @@ export class OldMan extends BasicChar{
 
     renderImage() {
         this.updateFrame();
-        this.createShadow(this.shadowWidth, this.shadowHeight, 0.4, 1, 3, 8, 2);
-        this.context.drawImage(this.getImage(), 
+        this.createShadow(0.4, 1, 3, 8, 2);
+        this.setImage()
+        this.context.drawImage(this.sprites, 
             (this.sourceX * this.currentFrame), this.sourceY, 
             this.width, this.height, 
             this.posX , (this.posY - (this.height * (this.sizeMultiplier-1))),

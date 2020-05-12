@@ -16,6 +16,12 @@ export class BasicChar extends BasicObject{
         this.doublejumpSpeedY = doublejumpSpeedY;
     }
 
+    setWidthImage(){
+        this.sourceX = (this.sprites.width / this.maxFrame);
+        this.width = (this.sprites.width / this.maxFrame);
+        this.height = this.sprites.height;
+    }
+
     update(){
         if (this.posX <= 0 && this.speedX < 0) {
             this.speedX = 0;
@@ -37,7 +43,9 @@ export class BasicChar extends BasicObject{
         this.posY += this.speedY;
     }
 
-    createShadow(shadowWidth, shadowHeight, multShadowPosX, multShadowPosY, multShadowWidth, multShadowHeight, multShadowRotate) {
+    createShadow(multShadowPosX, multShadowPosY, multShadowWidth, multShadowHeight, multShadowRotate) {
+        let shadowHeight = 41;
+        let shadowWidth = this.getTrueWidth();
         this.context.save();
         this.context.globalAlpha = 0.5; 
         this.context.fillStyle = 'black'; 

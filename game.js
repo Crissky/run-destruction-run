@@ -1,6 +1,7 @@
 import { Screen } from "./classes/screens/screen1.js";
 
-const screen = new Screen();
+const debug = false
+const screen = new Screen(debug);
 
 
 window.addEventListener('keydown', function (e) {
