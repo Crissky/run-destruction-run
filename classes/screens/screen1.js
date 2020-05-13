@@ -1,11 +1,10 @@
 import { Scenario1 } from "../scenarios/scenario1.js";
 import { OldMan } from "../chars/playables/oldMan.js";
 import { MotorSoldier } from "../chars/enemies/motorSoldier.js";
+import { MotorBombSoldier } from "../chars/enemies/motorBombSoldier.js";
 
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
-
-
 
 class GameStart {
     constructor(){
@@ -13,12 +12,12 @@ class GameStart {
     }
 
     renderImage(){
-        scenario1.renderImage();
+        //scenario1.renderImage();
 
     }
 
     update(){
-        scenario1.update(this.speed)
+        //scenario1.update(this.speed)
     }
 }
 
@@ -26,54 +25,58 @@ class GamePlay {
     constructor(debug=true){
         this.speed = 2;
         this.debug = debug;
+        this.scenario1 = new Scenario1(canvas, context);
+        this.oldman = new OldMan(canvas, 30, 361, this.debug);
+        this.motorBombSoldier = new MotorBombSoldier(canvas, 100, 361, this.debug);
     }
-    scenario1 = new Scenario1(canvas, context);
-    oldman = new OldMan(canvas, 30, 361, this.debug);
+    
 
     renderImage() {
         context.clearRect(0,0,canvas.width, canvas.height); // Clean Screen
-        scenario1.renderImage();
-        oldman.renderImage();
+        this.scenario1.renderImage();
+        this.oldman.renderImage();
+        this.motorBombSoldier.renderImage();
         //motorSoldier.renderImage();
 
     }
 
     update(){
-        scenario1.update(this.speed);
-        oldman.update();
+        this.scenario1.update(this.speed);
+        this.oldman.update();
+        this.motorBombSoldier.update();
         //motorSoldier.update();
     }
 
     keydownLeft() {
-        oldman.keydownLeft();
+        this.oldman.keydownLeft();
     }
 
     keydownRight() {
-        oldman.keydownRight();
+        this.oldman.keydownRight();
     }
 
     keydownUp() {
-        oldman.keydownUp();
+        this.oldman.keydownUp();
     }
 
     keydownDown() {
-        oldman.keydownDown();
+        this.oldman.keydownDown();
     }
     
     keyupLeft() {
-        oldman.keyupLeft();
+        this.oldman.keyupLeft();
     }
 
     keyupRight() {
-        oldman.keyupRight();
+        this.oldman.keyupRight();
     }
     
     keyupUp() {
-        oldman.keyupUp();
+        this.oldman.keyupUp();
     }
 
     keyupDown() {
-        oldman.keyupDown();
+        this.oldman.keyupDown();
     }
 }
 
@@ -83,12 +86,12 @@ class GameOver {
     }
 
     renderImage(){
-        scenario1.renderImage();
+        //scenario1.renderImage();
 
     }
 
     update(){
-        scenario1.update(this.speed)
+        //scenario1.update(this.speed)
     }
 }
 
