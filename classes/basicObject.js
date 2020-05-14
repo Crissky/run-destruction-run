@@ -34,5 +34,34 @@ export class BasicObject {
     }
 
     debugRect() { }
+	
+	getCenterPos() {
+        let mPosX = this.getCenterPosX();
+        let mPosY = this.getCenterPosY();
 
+        return { posX: mPosX, posY: mPosY };
+    }
+    getCenterPosX() {
+        return this.posX + (this.getTrueWidth() / 2);
+    }
+    getCenterPosY() {
+        return this.posY + (this.getTrueHeight() / 2);
+    }
+    getEndPosX() {
+        return this.posX + this.getTrueWidth();
+    }
+    getEndPosY() {
+        return this.posY + this.getTrueHeight();
+    }
+
+    setCenterPosX(centerPosX) {
+        this.posX = centerPosX - (this.getTrueWidth() / 2);
+    }
+    setCenterPosY(centerPosY) {
+        this.posY = centerPosY - (this.getTrueHeight() / 2);
+    }
+    setCenterPos(centerPos) {
+        this.posX = this.setCenterPosX(centerPos);
+        this.posY = this.setCenterPosY(centerPos);
+    }
 }
